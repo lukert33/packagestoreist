@@ -59,24 +59,6 @@ CustomerReceipt.prototype.tidyWithTotal = function() {
   return output;
 };
 
-// controller
-// should send the shelf abd CustomerReceipt to the view for rendering
 
-
-// view
-// listening for events and sending them to the controller
-function Display(shelfSelector, cartSelector) {
-  this.$inventoryDisplay = $(shelfSelector);
-  this.$cart = $(cartSelector);
-}
-
-Display.prototype.setDraggable = function() {
-  var $rows = this.$inventoryDisplay.children();
-  for( var i = 0; i < $rows.length; i++){
-    $($rows[i]).draggable({
-    helper: "clone"
-  });
-  }
-};
 
 
