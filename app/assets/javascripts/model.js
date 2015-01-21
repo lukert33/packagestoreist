@@ -25,61 +25,80 @@ function Inventory() {
 Inventory.prototype.addToShelf = function(name, price) {
   var item = new Item(name, price);
   this.shelf.push(item);
-}
+};
 
-Inventory.prototype.makeTidy = function(){
-  output = ""
-  this.shelf.forEach(function(item){
-    debugger
-    output += "<tr" + " id=sku" + this.shelf.indexOf(item) + "><td>"+item.name + "</td><td>"+ item.price + "</td></tr>";
-  }.bind(this))
+Inventory.prototype.makeTidy = function() {
+  output = "";
+  this.shelf.forEach(function(item) {
+    output += "<tr" + " id=sku" + this.shelf.indexOf(item) + "><td>" + item.name + "</td><td>" + item.price + "</td></tr>";
+  }.bind(this));
   return output;
-}
+};
 
 function Item(name, price) {
   this.name = name;
   this.price = price;
 }
 
-function PackieCart(){
+function CustomerReceipt() {
   this.contents = [];
 }
 
-PackieCart.prototype.addToCart = function(itemObject) {
+CustomerReceipt.prototype.addToReceipt = function(itemObject) {
   this.contents.push(itemObject);
-}
+};
 
-PackieCart.prototype.tidyWithTotal = function(){
+CustomerReceipt.prototype.tidyWithTotal = function() {
   output = "";
   total = 0;
-  this.contents.forEach(function(item){
-    output += "<tr><td>"+item.name + "</td><td>"+ item.price + "</td></tr>";
+  this.contents.forEach(function(item) {
+    output += "<tr><td>" + item.name + "</td><td>" + item.price + "</td></tr>";
     total += item.price;
-  })
-  output += "<tr><td> TOTAL </td><td>"+ total + "</td></tr>"
+  });
+  output += "<tr><td> TOTAL </td><td>" + total + "</td></tr>"
   return output;
-}
+};
 
 // controller
-// should send the shelf abd packiecart to the view for rendering
-function StoreClerk(inventory, cart, view){
+// should send the shelf abd CustomerReceipt to the view for rendering
+function StoreClerk(inventory, receipt, view) {
   this.inventory = inventory;
-  this.cart = cart;
-  this.view  = view;
-}
+  this.receipt = receipt;
+  this.view = view;
+};
 
 StoreClerk.prototype.stockShelf = function() {
-  this.view.$inventoryDisplay.html( this.inventory.makeTidy() );
-}
+  this.view.$inventoryDisplay.html(this.inventory.makeTidy());
+};
 
-StoreClerk.prototype.sellBooze = function(){
-  this.view.$cart.html( this.cart.tidyWithTotal() );
-}
+StoreClerk.prototype.sellBooze = function() {
+  this.view.$cart.html(this.receipt.tidyWithTotal());
+};
+
+StoreClerk.prototype.prepareCart = function() {
+  this.view.$cart.droppable({
+    drop: function(event, ui){
+      var itemSku = ui.draggable.attr("id").replace("sku","");
+      this.receipt.addToReceipt(this.inventory.shelf[itemSku]);
+      this.sellBooze();
+    }.bind(this)
+  });
+};
 
 // view
 // listening for events and sending them to the controller
-function Display(shelfSelector, cartSelector){
+function Display(shelfSelector, cartSelector) {
   this.$inventoryDisplay = $(shelfSelector);
   this.$cart = $(cartSelector);
 }
+
+Display.prototype.setDraggable = function() {
+  var $rows = this.$inventoryDisplay.children();
+  for( var i = 0; i < $rows.length; i++){
+    $($rows[i]).draggable({
+    helper: "clone"
+  });
+  }
+};
+
 
