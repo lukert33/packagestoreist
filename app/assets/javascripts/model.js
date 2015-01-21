@@ -35,7 +35,7 @@ CustomerReceipt.prototype.tidyWithTotal = function() {
     output += "<tr><td>" + item.name + "</td><td>" + item.price + "</td></tr>";
     total += item.price;
   });
-  output += "<tr><td> TOTAL </td><td>" + total + "</td></tr>"
+  output += "<tr><td> TOTAL </td><td>" + total + "</td></tr>";
   return output;
 };
 
