@@ -1,23 +1,3 @@
-$(document).ready(function() {
-  var inv = new Inventory;
-  var display = new Display("#store_list", "#grocery_list");
-  var receipt = new CustomerReceipt();
-  var clerk = new StoreClerk(inv, receipt, display);
-  inv.addToShelf("jager", 30);
-  inv.addToShelf("smirnoff", 20);
-  inv.addToShelf("jello shots", 5);
-  inv.addToShelf("harlem snake bite", 3);
-  inv.addToShelf("rumplemintz", 12);
-  inv.addToShelf("pbr", 3);
-  inv.addToShelf("belly off frank", 10);
-  clerk.stockShelf();
-  clerk.sellBooze();
-  display.setDraggable();
-  clerk.prepareCart();
-});
-
-// model
-
 function Inventory() {
   this.shelf = [];
 }
