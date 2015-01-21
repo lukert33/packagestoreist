@@ -2,13 +2,13 @@ body {
   font-family: sans-serif;
 }
 
-.row {
-  margin-left: -20px;
+.store {
+  margin: 30px auto;
 }
 
 .span6 {
   padding-left: 10px;
-  margin-left: 10px;
+  margin-left: 90px;
   max-width: 50%;
   float: left;
   height: 100%;
@@ -24,6 +24,7 @@ td, th {
 
 tbody tr:nth-child(even) {
   background-color: #cdcdcd;
+  line-height: 1.8em;
 }
 
 tbody tr:nth-child(odd) {
@@ -35,14 +36,16 @@ table {
   border: 1px solid #bbb;
 }
 
-table#grocery_list tfoot {
-  color: red;
-}
-
-.item, .item * {
+tbody tr {
   cursor: pointer;
   -webkit-user-select: none; /* Chrome/Safari */
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+ */
   user-select: none;
+}
+
+#grocery_list tr:last-child {
+  color: #5CB614;
+  text-decoration: underline;
+  font-weight: bold;
 }
