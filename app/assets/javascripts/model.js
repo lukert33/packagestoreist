@@ -13,3 +13,11 @@ function Item(name, price) {
 }
 
 function PackieCart(){}
+
+// view
+// listening for events and sending them to the controller
+function Display(shelfSelector, cartSelector){
+  this.$inventoryDisplay = $(shelfSelector);
+  this.$cartSelector = $(cartSelector);
+}
+
