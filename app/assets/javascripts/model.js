@@ -1,22 +1,20 @@
-$(document).ready(function(){
-  inv = new Inventory;
-  display = new Display("#store_list", "#grocery_list");
-  cart = new PackieCart();
-  clerk = new StoreClerk(inv, cart, display);
+$(document).ready(function() {
+  var inv = new Inventory;
+  var display = new Display("#store_list", "#grocery_list");
+  var receipt = new CustomerReceipt();
+  var clerk = new StoreClerk(inv, receipt, display);
   inv.addToShelf("jager", 30);
-  inv.addToShelf("smirnoff",20);
+  inv.addToShelf("smirnoff", 20);
   inv.addToShelf("jello shots", 5);
   inv.addToShelf("harlem snake bite", 3);
-  inv.addToShelf("rumplemintz",12);
+  inv.addToShelf("rumplemintz", 12);
   inv.addToShelf("pbr", 3);
   inv.addToShelf("belly off frank", 10);
-  cart.addToCart(inv.shelf[0]);
-  cart.addToCart(inv.shelf[1]);
-  cart.addToCart(inv.shelf[2]);
-  cart.addToCart(inv.shelf[3]);
   clerk.stockShelf();
   clerk.sellBooze();
-})
+  display.setDraggable();
+  clerk.prepareCart();
+});
 
 // model
 
