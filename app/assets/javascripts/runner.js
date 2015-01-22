@@ -13,13 +13,13 @@ $(document).ready(function() {
 });
 
 var drinks = {
-  "Jaegermaester": 30,
+  "Guiness": 30,
   "Smirnoff": 20,
   "Jello Shots (made w/ love)": 5,
   "Harlem Snake Bite": 3,
   "Rumplemintz": 12,
   "PBR": 3,
-  "Belly Shot off Frank": 10
+  "Frozen Pizza": 10
 };
 
 function seed(drinks) {
